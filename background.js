@@ -21,3 +21,13 @@ chrome.runtime.onMessage.addListener((message) => {
     });
   }
 });
+
+chrome.contextMenus.create({
+  title: "Save to Roam",
+  id: "save",
+  contexts: ["page", "frame", "selection"],
+});
+
+chrome.contextMenus.onClicked.addListener((info, tab) => {
+  chrome.tabs.executeScript(tab.id, { file: "bookmarklet.js" });
+});
